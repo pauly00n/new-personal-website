@@ -1,11 +1,20 @@
 import { ArrowDown } from "lucide-react"
 import TextLink from "@/components/ui/textlink";
 import { ButtonRow } from "@/components/buttonrow"
-import { fadeUp } from "@/lib/animations"
+
+const fadeUp = (delay: number): React.CSSProperties => ({
+  animation: `heroFadeUp 550ms ease-out ${delay}ms both`,
+})
 
 export function Hero() {
   return (
     <section className="hero relative flex min-h-svh flex-col">
+      <style>{`
+        @keyframes heroFadeUp {
+          from { opacity: 0; transform: translateY(12px); }
+          to   { opacity: 1; transform: translateY(0); }
+        }
+      `}</style>
 
       {/* Nav spacer */}
       <div className="h-[74px] shrink-0" />
