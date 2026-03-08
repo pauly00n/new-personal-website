@@ -7,8 +7,32 @@ const _inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
 const _playfair = Playfair_Display({ subsets: ["latin"], variable: "--font-playfair" });
 
 export const metadata: Metadata = {
+  metadataBase: new URL(
+    process.env.NEXT_PUBLIC_SITE_URL ??
+    (process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : 'http://localhost:3000')
+  ),
   title: 'Paul Yoon',
   description: 'Stanford University Undergraduate studying Computer Science and Music',
+  openGraph: {
+    title: 'Paul Yoon',
+    description: 'Stanford University Undergraduate studying Computer Science and Music',
+    siteName: 'Paul Yoon',
+    images: [
+      {
+        url: '/og-image.png',
+        width: 1200,
+        height: 630,
+        alt: 'Paul Yoon',
+      },
+    ],
+    type: 'website',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Paul Yoon',
+    description: 'Stanford University Undergraduate studying Computer Science and Music',
+    images: ['/og-image.png'],
+  },
   icons: {
     icon: [
       {
