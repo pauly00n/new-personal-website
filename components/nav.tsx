@@ -12,15 +12,14 @@ const navLinks = [
 
 export function Nav() {
   const pathname = usePathname()
-  const [tintOpacity, setTintOpacity] = useState(20)
+  const [overProjects, setOverProjects] = useState(false)
 
   useEffect(() => {
     function check() {
       const projects = document.getElementById('projects')
-      if (!projects) { setTintOpacity(20); return }
+      if (!projects) { setOverProjects(false); return }
       const { top, bottom } = projects.getBoundingClientRect()
-      // nav pill sits at top-6 (~24px) and is ~50px tall, so ~74px from viewport top
-      setTintOpacity(top < 74 && bottom > 0 ? 40 : 16)
+      setOverProjects(top < 74 && bottom > 0)
     }
     check()
     window.addEventListener('scroll', check, { passive: true })
@@ -50,7 +49,10 @@ export function Nav() {
           transform: scaleX(1);
         }
       `}</style>
-      <GlassPillAuto className="flex items-center gap-6 px-6 py-3" tintOpacity={tintOpacity}>
+      <GlassPillAuto
+        className="flex items-center gap-6 px-6 py-3"
+        tintOpacity={overProjects ? 40 : 16}
+      >
         <Image
             src="/icon-light.png"
             className="text-sm font-semibold tracking-tight text-foreground"

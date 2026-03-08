@@ -125,7 +125,8 @@ export default function GlassPillSafari({
           borderRadius,
           backdropFilter:       `blur(${blurAmount}px) saturate(180%) brightness(1.08)`,
           WebkitBackdropFilter: `blur(${blurAmount}px) saturate(180%) brightness(1.08)`,
-          backgroundColor: `rgba(${tintRgb}, ${1/ 100})`,
+          backgroundColor: `rgba(${tintRgb}, ${tintOpacity === 40 ? 0.20 : 0.01})`,
+          transition: 'background-color 500ms ease',
         }}
       />
 

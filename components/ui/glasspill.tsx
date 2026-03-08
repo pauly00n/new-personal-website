@@ -250,7 +250,7 @@ export default function GlassPill({
     borderRadius,
     boxShadow: `inset 0 0 ${shadowBlur}px ${shadowSpread}px ${shadowColor}`,
     backgroundColor: `rgba(${tintRgb}, ${Math.max(0, Math.min(100, tintOpacity)) / 100})`,
-    transition: 'background-color 600ms ease',
+    transition: 'background-color 500ms ease',
   }
 
   return (
