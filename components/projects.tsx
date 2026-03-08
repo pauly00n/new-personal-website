@@ -3,6 +3,8 @@
 import { useEffect, useRef, useState } from "react"
 import Image from "next/image"
 import { ArrowUpRight, Github } from "lucide-react"
+import { SectionTopGlow } from "@/components/ui/section-top-glow"
+import { useIntersectionOnce } from "@/hooks/use-intersection-once"
 
 const projects = [
   {
@@ -65,22 +67,10 @@ export function Projects() {
   const rowRef2 = useRef<HTMLDivElement>(null)
   const rowRefs = [rowRef0, rowRef1, rowRef2]
 
-  const [headingVisible, setHeadingVisible] = useState(false)
+  const headingVisible = useIntersectionOnce(sectionRef)
   const [rowVisible, setRowVisible] = useState([false, false, false])
   // Tracks when each row's observer fired — used to detect simultaneous triggers
   const rowTriggeredAt = useRef<(number | null)[]>([null, null, null])
-
-  // Heading observer
-  useEffect(() => {
-    const el = sectionRef.current
-    if (!el) return
-    const observer = new IntersectionObserver(
-      ([entry]) => { if (entry.isIntersecting) { setHeadingVisible(true); observer.disconnect() } },
-      { threshold: 0.05 }
-    )
-    observer.observe(el)
-    return () => observer.disconnect()
-  }, [])
 
   // Per-row observers — each fires independently when that row enters the viewport
   useEffect(() => {
@@ -164,22 +154,7 @@ export function Projects() {
         }
       `}</style>
 
-      {/* Radial glow along the top border */}
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute inset-x-0 top-0 h-px"
-        style={{
-          background: 'radial-gradient(ellipse 60% 1px at 50% 0%, rgba(1,123,185,0.35) 0%, transparent 100%)',
-        }}
-      />
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute inset-x-0 top-0"
-        style={{
-          height: '120px',
-          background: 'radial-gradient(ellipse 50% 120px at 50% 0%, rgba(1,123,185,0.08) 0%, transparent 100%)',
-        }}
-      />
+      <SectionTopGlow />
 
       <div className="mx-auto max-w-6xl px-6 py-24 lg:px-8 lg:py-20">
 

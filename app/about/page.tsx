@@ -4,11 +4,8 @@ import { Footer } from "@/components/footer"
 import { HeroBackground } from "@/components/hero-background"
 import Image from "next/image"
 import { ScrollReset } from "@/components/scroll-reset"
-import TextLink from "@/components/ui/textlink";
-
-const fadeUp = (delay: number): React.CSSProperties => ({
-  animation: `aboutFadeUp 550ms ease-out ${delay}ms both`,
-})
+import TextLink from "@/components/ui/textlink"
+import { fadeUp } from "@/lib/animations"
 
 export default function AboutPage() {
   return (
@@ -19,12 +16,6 @@ export default function AboutPage() {
       </div>
 
       <div>
-        <style>{`
-          @keyframes aboutFadeUp {
-            from { opacity: 0; transform: translateY(12px); }
-            to   { opacity: 1; transform: translateY(0); }
-          }
-        `}</style>
         <ScrollReset />
         <main>
           <section className="min-h-svh flex flex-col">

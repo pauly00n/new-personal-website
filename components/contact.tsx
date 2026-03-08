@@ -1,4 +1,5 @@
 import { Github, Linkedin, Mail, Twitter } from "lucide-react"
+import { SectionLabel } from "@/components/ui/section-label"
 
 const socials = [
   { label: "GitHub", href: "#", icon: Github },
@@ -11,13 +12,7 @@ export function Contact() {
   return (
     <section id="contact" className="border-t border-border/50">
       <div className="mx-auto max-w-5xl px-6 py-24 lg:px-8 lg:py-32">
-        {/* Section label */}
-        <div className="flex items-center gap-4 mb-16">
-          <span className="text-xs font-medium uppercase tracking-widest text-muted-foreground">
-            Contact
-          </span>
-          <div className="h-px flex-1 bg-border" />
-        </div>
+        <SectionLabel>Contact</SectionLabel>
 
         <div className="grid gap-12 lg:grid-cols-2">
           {/* Left */}

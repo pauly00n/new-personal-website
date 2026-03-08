@@ -1,4 +1,6 @@
 import { ArrowUpRight } from "lucide-react"
+import { SectionTopGlow } from "@/components/ui/section-top-glow"
+import { SectionLabel } from "@/components/ui/section-label"
 
 const experiences = [
   {
@@ -42,31 +44,11 @@ const experiences = [
 export function Work() {
   return (
     <section id="work" className="relative border-t border-border/50">
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute inset-x-0 top-0 h-px"
-        style={{
-          background: 'radial-gradient(ellipse 60% 1px at 50% 0%, rgba(1,123,185,0.35) 0%, transparent 100%)',
-        }}
-      />
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute inset-x-0 top-0"
-        style={{
-          height: '120px',
-          background: 'radial-gradient(ellipse 50% 120px at 50% 0%, rgba(1,123,185,0.08) 0%, transparent 100%)',
-        }}
-      />
+      <SectionTopGlow />
 
       <div className="mx-auto max-w-5xl px-6 py-24 lg:px-8 lg:py-32">
 
-        {/* Section label */}
-        <div className="flex items-center gap-4 mb-16">
-          <span className="text-xs font-medium uppercase tracking-widest text-muted-foreground">
-            Experience
-          </span>
-          <div className="h-px flex-1 bg-border" />
-        </div>
+        <SectionLabel>Experience</SectionLabel>
 
         {/* Experience list */}
         <div className="flex flex-col gap-3">

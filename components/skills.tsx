@@ -1,6 +1,9 @@
 "use client"
 
-import { useEffect, useRef, useState } from "react"
+import { useRef } from "react"
+import { SectionTopGlow } from "@/components/ui/section-top-glow"
+import { SectionLabel } from "@/components/ui/section-label"
+import { useIntersectionOnce, useIntersectionsOnce } from "@/hooks/use-intersection-once"
 import { FaPython, FaReact } from "react-icons/fa"
 import {
   SiGit, SiLatex, SiTypescript, SiJavascript, SiPandas,
@@ -58,38 +61,8 @@ export function Skills() {
   const colRef2 = useRef<HTMLDivElement>(null)
   const colRefs = [colRef0, colRef1, colRef2]
 
-  const [headingVisible, setHeadingVisible] = useState(false)
-  const [colVisible, setColVisible] = useState([false, false, false])
-
-  useEffect(() => {
-    const el = sectionRef.current
-    if (!el) return
-    const observer = new IntersectionObserver(
-      ([entry]) => { if (entry.isIntersecting) { setHeadingVisible(true); observer.disconnect() } },
-      { threshold: 0.05 }
-    )
-    observer.observe(el)
-    return () => observer.disconnect()
-  }, [])
-
-  useEffect(() => {
-    const observers = colRefs.map((ref, i) => {
-      const el = ref.current
-      if (!el) return null
-      const observer = new IntersectionObserver(
-        ([entry]) => {
-          if (entry.isIntersecting) {
-            setColVisible(prev => { const next = [...prev]; next[i] = true; return next })
-            observer.disconnect()
-          }
-        },
-        { threshold: 0.05 }
-      )
-      observer.observe(el)
-      return observer
-    })
-    return () => observers.forEach(o => o?.disconnect())
-  }, [])
+  const headingVisible = useIntersectionOnce(sectionRef)
+  const colVisible = useIntersectionsOnce(colRefs)
 
   function headingFade(): React.CSSProperties {
     return headingVisible
@@ -125,27 +98,11 @@ export function Skills() {
         }
       `}</style>
 
-      {/* Radial glow on top border */}
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute inset-x-0 top-0 h-px"
-        style={{ background: 'radial-gradient(ellipse 60% 1px at 50% 0%, rgba(1,123,185,0.35) 0%, transparent 100%)' }}
-      />
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute inset-x-0 top-0"
-        style={{ height: '120px', background: 'radial-gradient(ellipse 50% 120px at 50% 0%, rgba(1,123,185,0.08) 0%, transparent 100%)' }}
-      />
+      <SectionTopGlow />
 
       <div className="mx-auto max-w-5xl px-6 py-24 lg:px-8 lg:py-32">
 
-        {/* Section label */}
-        <div className="flex items-center gap-4 mb-16" style={headingFade()}>
-          <span className="text-sm font-medium uppercase tracking-widest text-foreground">
-            Skills
-          </span>
-          <div className="h-px flex-1 bg-border" />
-        </div>
+        <SectionLabel style={headingFade()} className="text-sm text-foreground">Skills</SectionLabel>
 
         {/* 3-column grid */}
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
