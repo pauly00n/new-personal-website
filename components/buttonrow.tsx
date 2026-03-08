@@ -43,7 +43,7 @@ export function ButtonRow() {
             <a
               key={i}
               href={isAbsorbed ? undefined : social.href}
-              className="inline-flex items-center justify-center rounded-full text-sm font-medium text-foreground bg-white/10 border border-white/20 backdrop-blur-md shadow-[0_8px_30px_rgba(0,0,0,0.12)] overflow-hidden hover:bg-white/20 hover:border-white/40 active:scale-[0.98]"
+              className="inline-flex items-center justify-center rounded-full text-sm font-medium text-foreground bg-white/10 border border-white/20 backdrop-blur-md shadow-[0_8px_30px_rgba(0,0,0,0.20)] overflow-hidden hover:bg-white/20 hover:border-white/40 active:scale-[0.98]"
               style={{
                 position:      "absolute",
                 left:          i * (W + GAP),

@@ -155,7 +155,7 @@ export function Skills() {
               ref={colRefs[ci]}
               style={colFade(ci)}
             >
-              <div className="rounded-2xl border border-border/50 px-7 py-6 h-full">
+              <div className="rounded-2xl border border-white/20 backdrop-blur-md shadow-[0_8px_30px_rgba(0,0,0,0.12)] px-7 py-6 h-full hover:bg-white/8 hover:border-white/40 transition-colors">
                 <h3 className="mb-5 text-sm font-medium uppercase tracking-widest text-foreground/90">
                   {col.heading}
                 </h3>
