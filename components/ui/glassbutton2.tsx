@@ -159,7 +159,7 @@ const STYLES = `
 }
 
 .gb2-btn:hover .gb2-span::after {
-  background-position: 25% 50%;
+  background-position: var(--gb2-sheen-hover-pos, 25% 50%);
 }
 
 .gb2-btn::after {

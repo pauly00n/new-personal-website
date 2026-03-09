@@ -107,7 +107,7 @@ export function Skills() {
             >
               <GlassButton2
                 fill
-                wrapperStyle={{ '--gb2-radius': '1rem', '--gb2-sheen-pos': '10% 10%', height: '100%' } as React.CSSProperties}
+                wrapperStyle={{ '--gb2-radius': '1rem', '--gb2-sheen-pos': '7% 7%', '--gb2-sheen-hover-pos': '13% 21%', height: '100%' } as React.CSSProperties}
                 spanStyle={{
                   flexDirection: 'column',
                   alignItems: 'flex-start',
