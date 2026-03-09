@@ -95,7 +95,7 @@ export function Skills() {
 
       <div className="mx-auto max-w-5xl px-6 py-24 lg:px-8 lg:py-32">
 
-        <h2 className="mb-10 font-serif text-3xl font-medium tracking-tight text-foreground sm:text-4xl">
+        <h2 className="mb-16 font-serif text-3xl font-medium tracking-tight text-foreground sm:text-4xl">
           <span style={headingFade()}>Skills: Things I</span>
           <br />
           <span className="italic" style={{ color: "#017bb9", ...headingFade2() }}>

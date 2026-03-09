@@ -102,12 +102,12 @@ export function Projects() {
   // Row 0: left card at 0ms, right card staggered 200ms.
   // Rows 1+: both cards fire simultaneously at 0ms.
   const CARD_ANIM = [
-    { name: "projectsFadeTopLeft",  delay: 0 },
-    { name: "projectsFadeTopRight", delay: 200 },
-    { name: "projectsFadeLeft",     delay: 0 },
-    { name: "projectsFadeRight",    delay: 0 },
-    { name: "projectsFadeLeft",     delay: 0 },
-    { name: "projectsFadeRight",    delay: 0 },
+    { name: "projectsFadeTopLeft",  delay: 700 },
+    { name: "projectsFadeTopRight", delay: 900 },
+    { name: "projectsFadeLeft",     delay: 500 },
+    { name: "projectsFadeRight",    delay: 500 },
+    { name: "projectsFadeLeft",     delay: 200 },
+    { name: "projectsFadeRight",    delay: 200 },
   ]
 
   function cardFadeStyle(idx: number): React.CSSProperties {
@@ -137,11 +137,11 @@ export function Projects() {
         {/* Heading */}
         <div className="mb-10">
           <h2 className="font-serif text-3xl font-medium tracking-tight text-foreground sm:text-4xl">
-            <span style={fadeStyle(0)}>
+            <span style={fadeStyle(200)}>
               Here&apos;s what I&apos;ve
             </span>
             <br />
-            <span className="italic" style={{ color: "#017bb9", ...fadeStyle(300) }}>
+            <span className="italic" style={{ color: "#017bb9", ...fadeStyle(500) }}>
               worked on.
             </span>
           </h2>
