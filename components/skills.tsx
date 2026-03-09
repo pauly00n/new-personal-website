@@ -5,14 +5,14 @@ import { SectionTopGlow } from "@/components/ui/section-top-glow"
 import { SectionLabel } from "@/components/ui/section-label"
 import { useIntersectionOnce, useIntersectionsOnce } from "@/hooks/use-intersection-once"
 import GlassButton2 from "@/components/ui/glassbutton2"
-import { FaPython, FaReact } from "react-icons/fa"
+import { FaPython, FaReact, FaAws } from "react-icons/fa"
 import {
   SiGit, SiLatex, SiTypescript, SiJavascript, SiPandas,
   SiScikitlearn, SiPytorch, SiCplusplus, SiApachespark,
-  SiJupyter, SiQt,
+  SiJupyter, SiQt, SiFlask, SiExpress, SiFastapi, SiTailwindcss, SiC, SiGooglecloud,
 } from "react-icons/si"
 import { PiFileHtmlDuotone } from "react-icons/pi"
-import { TbBrandReactNative } from "react-icons/tb"
+import { TbBrandReactNative, TbMath } from "react-icons/tb"
 import { RiNextjsFill, RiSupabaseFill } from "react-icons/ri"
 import { VscVscode } from "react-icons/vsc"
 
@@ -21,11 +21,13 @@ const columns = [
     heading: "Languages",
     skills: [
       { label: "Python",      Icon: FaPython },
-      { label: "LaTeX",       Icon: SiLatex },
       { label: "JavaScript",  Icon: SiJavascript },
       { label: "TypeScript",  Icon: SiTypescript },
       { label: "HTML / CSS",  Icon: PiFileHtmlDuotone },
+      { label: "LaTeX",       Icon: SiLatex },
+      { label: "Lean",        Icon: TbMath },
       { label: "C++",         Icon: SiCplusplus },
+      { label: "C",           Icon: SiC },
     ],
   },
   {
@@ -34,6 +36,9 @@ const columns = [
       { label: "React",        Icon: FaReact },
       { label: "React Native", Icon: TbBrandReactNative },
       { label: "Next.js",      Icon: RiNextjsFill },
+      { label: "Tailwind CSS", Icon: SiTailwindcss },
+      { label: "FastAPI",      Icon: SiFastapi },
+      { label: "Express",      Icon: SiExpress },
       { label: "Pandas",       Icon: SiPandas },
       { label: "Scikit-Learn", Icon: SiScikitlearn },
       { label: "PyTorch",      Icon: SiPytorch },
@@ -42,11 +47,13 @@ const columns = [
   {
     heading: "Developer Tools",
     skills: [
-      { label: "Git & Github",     Icon: SiGit },
-      { label: "VS Code",          Icon: VscVscode },
-      { label: "Apache Spark",     Icon: SiApachespark },
+      { label: "Git / Github",     Icon: SiGit },
       { label: "Supabase",         Icon: RiSupabaseFill },
+      { label: "AWS",              Icon: FaAws },
+      { label: "Google Cloud",     Icon: SiGooglecloud },
+      { label: "Apache Spark",     Icon: SiApachespark },
       { label: "Jupyter Notebook", Icon: SiJupyter },
+      { label: "VS Code",          Icon: VscVscode },
       { label: "Qt Creator",       Icon: SiQt },
     ],
   },
