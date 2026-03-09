@@ -27,7 +27,7 @@ export function HeroBackground() {
         style={{
           backgroundImage: "url('/noise.png')",
           backgroundRepeat: "repeat",
-          backgroundSize: "900px 900px",
+          backgroundSize: "700px 700px",
           opacity: isSafari ? 0.10 : 0.4,
           mixBlendMode: isSafari ? "normal" : "soft-light",
         }}
@@ -50,7 +50,7 @@ export function HeroBackground() {
             inset: "-25%",
             background:
               "radial-gradient(ellipse 50% 50%, rgba(1, 123, 185, 0.40), transparent)",
-            animation: "driftBloom 7s ease-in-out infinite",
+            animation: "driftBloom 10s ease-in-out infinite",
           }}
         />
       </div>

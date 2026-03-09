@@ -29,10 +29,10 @@ export default function AboutPage() {
               <div className="grid gap-10 sm:grid-cols-5">
                 {/* Left column */}
                 <div className="flex flex-col gap-6 sm:col-span-2">
-                  <h2 style={fadeUp(0)} className="font-serif text-3xl font-medium tracking-tight text-foreground sm:text-4xl pb-6">
-                    A bit
+                  <h2 className="font-serif text-3xl font-medium tracking-tight text-foreground sm:text-4xl pb-6">
+                    <span style={fadeUp(0)}>A bit</span>
                     <br />
-                    <span className="italic" style={{ color: "#017bb9" }}>
+                    <span className="italic" style={{ color: "#017bb9", ...fadeUp(300) }}>
                       about me.
                     </span>
                   </h2>

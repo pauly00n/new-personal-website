@@ -1,16 +1,17 @@
 import type { MetadataRoute } from 'next'
 
 export default function sitemap(): MetadataRoute.Sitemap {
+    const date = new Date();
   return [
     {
       url: 'https://paulyoon.xyz',
-      lastModified: new Date(),
+      lastModified: date,
       changeFrequency: 'monthly',
       priority: 1,
     },
     {
       url: 'https://paulyoon.xyz/about',
-      lastModified: new Date(),
+      lastModified: date,
       changeFrequency: 'monthly',
       priority: 0.8,
     },

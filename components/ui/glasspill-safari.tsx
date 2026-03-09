@@ -5,6 +5,7 @@ import React, {
   HTMLAttributes,
   ReactNode,
   useEffect,
+  useMemo,
   useRef,
   useState,
 } from 'react'
@@ -92,7 +93,7 @@ export default function GlassPillSafari({
     drawSpecular(canvas, size.width, size.height, r)
   }, [size, borderRadius])
 
-  const tintRgb = hexToRgb(tintColor)
+  const tintRgb = useMemo(() => hexToRgb(tintColor), [tintColor])
 
   const containerStyle: CSSProperties = {
     borderRadius,

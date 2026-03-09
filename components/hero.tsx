@@ -1,6 +1,7 @@
 import { ArrowDown } from "lucide-react"
 import TextLink from "@/components/ui/textlink";
 import { ButtonRow } from "@/components/buttonrow"
+import GlassButton2 from "@/components/ui/glassbutton2"
 
 const fadeUp = (delay: number): React.CSSProperties => ({
   animation: `fadeUp 550ms ease-out ${delay}ms both`,

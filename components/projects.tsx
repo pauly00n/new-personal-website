@@ -179,7 +179,7 @@ export function Projects() {
                     className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 ease-out"
                     style={{
                       background:
-                        "linear-gradient(to bottom, transparent 15%, rgba(1, 60, 110, 0.55) 50%, rgba(0, 40, 85, 0.92) 100%)",
+                        "linear-gradient(to bottom, transparent 25%, rgba(1, 60, 110, 0.55) 50%, rgba(0, 40, 85, 0.92) 100%)",
                     }}
                   />
 

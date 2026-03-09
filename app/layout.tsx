@@ -69,7 +69,7 @@ export default function RootLayout({
                                 "@type": "CollegeOrUniversity",
                                 "name": "Stanford University"
                             },
-                            "url": "https://paulyoon.com"
+                            "url": "https://paulyoon.xyz"
                         }),
                     }}
                 />

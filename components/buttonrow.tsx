@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react"
 import { Github, Mail, Linkedin, Twitter } from "lucide-react"
+import GlassButton2 from "@/components/ui/glassbutton2"
 
 const SOCIALS = [
   { href: "https://github.com/pauly00n", icon: Github, label: "GitHub" },
@@ -13,7 +14,7 @@ const SOCIALS = [
 const W = 52
 const GAP = 12
 const EASING = "cubic-bezier(0.4, 0, 0.2, 1)"
-const SEQUENCE = [0, 1, 2, 3, 2, 1] // state 1->2->3->4->3->2
+const SEQUENCE = [0, 1, 2, 3, 2, 1]
 
 export function ButtonRow() {
   const [tick, setTick] = useState(0)
@@ -40,24 +41,24 @@ export function ButtonRow() {
                 : (i + 1) * STEP
 
           return (
-            <a
+            <GlassButton2
               key={social.label}
               href={social.href}
-              aria-label={social.label}
-              className="inline-flex items-center justify-center rounded-full text-sm font-medium text-foreground bg-white/10 border border-white/20 backdrop-blur-md shadow-[0_8px_30px_rgba(0,0,0,0.20)] overflow-hidden hover:bg-white/20 hover:border-white/40 active:scale-[0.98]"
-              style={{
+              fill
+              spanStyle={{ gap: isActive ? "6px" : "0px" }}
+              wrapperStyle={{
                 position: "absolute",
                 left,
                 top: 0,
                 width: isActive ? W * 2 + GAP : W,
                 height: W,
-                gap: isActive ? "8px" : "0px",
-                transition: `width 0.45s ${EASING}, left 0.45s ${EASING}, opacity 0.2s ease`,
+                transition: `width 0.45s ${EASING}, left 0.45s ${EASING}`,
               }}
             >
               <social.icon className="h-5 w-5 shrink-0" />
               <span
                 style={{
+                  display: "inline-block",
                   maxWidth: isActive ? "80px" : "0px",
                   opacity: isActive ? 1 : 0,
                   overflow: "hidden",
@@ -65,11 +66,16 @@ export function ButtonRow() {
                   transition: isActive
                     ? `max-width 0.4s ${EASING} 0.05s, opacity 0.1s ease 0.05s`
                     : `max-width 0.4s ${EASING} 0.05s, opacity 0s`,
+                  fontSize: "0.875rem",
+                  fontFamily: "Inter, sans-serif",
+                  fontWeight: 500,
+                  letterSpacing: "-0.05em",
+                  color: "rgba(50, 50, 50, 1)",
                 }}
               >
                 {social.label}
               </span>
-            </a>
+            </GlassButton2>
           )
         })}
       </div>

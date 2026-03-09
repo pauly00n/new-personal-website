@@ -4,6 +4,7 @@ import { useRef } from "react"
 import { SectionTopGlow } from "@/components/ui/section-top-glow"
 import { SectionLabel } from "@/components/ui/section-label"
 import { useIntersectionOnce, useIntersectionsOnce } from "@/hooks/use-intersection-once"
+import GlassButton2 from "@/components/ui/glassbutton2"
 import { FaPython, FaReact } from "react-icons/fa"
 import {
   SiGit, SiLatex, SiTypescript, SiJavascript, SiPandas,
@@ -70,6 +71,12 @@ export function Skills() {
       : { opacity: 0 }
   }
 
+  function headingFade2(): React.CSSProperties {
+    return headingVisible
+      ? { animation: `skillsFromBottom 600ms ease-out 300ms both` }
+      : { opacity: 0 }
+  }
+
   function colFade(col: number): React.CSSProperties {
     if (!colVisible[col]) return { opacity: 0 }
     return { animation: `${COL_ANIM[col]} 550ms ease-out 300ms both` }
@@ -81,7 +88,13 @@ export function Skills() {
 
       <div className="mx-auto max-w-5xl px-6 py-24 lg:px-8 lg:py-32">
 
-        <SectionLabel style={headingFade()} className="text-sm text-foreground">Skills</SectionLabel>
+        <h2 className="mb-10 font-serif text-3xl font-medium tracking-tight text-foreground sm:text-4xl">
+          <span style={headingFade()}>Skills: Things I</span>
+          <br />
+          <span className="italic" style={{ color: "#017bb9", ...headingFade2() }}>
+            Build With.
+          </span>
+        </h2>
 
         {/* 3-column grid */}
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
@@ -90,8 +103,20 @@ export function Skills() {
               key={col.heading}
               ref={colRefs[ci]}
               style={colFade(ci)}
+              className="h-full"
             >
-              <div className="rounded-2xl border border-white/20 backdrop-blur-md shadow-[0_8px_30px_rgba(0,0,0,0.12)] px-7 py-6 h-full hover:bg-white/8 hover:border-white/40 transition-colors bg-gradient-to-b from-white/5 to-white/2">
+              <GlassButton2
+                fill
+                wrapperStyle={{ '--gb2-radius': '1rem', '--gb2-sheen-pos': '10% 10%', height: '100%' } as React.CSSProperties}
+                spanStyle={{
+                  flexDirection: 'column',
+                  alignItems: 'flex-start',
+                  justifyContent: 'flex-start',
+                  padding: '1.5rem 1.75rem',
+                  textShadow: 'none',
+                  letterSpacing: 'normal',
+                }}
+              >
                 <h3 className="mb-5 text-sm font-medium uppercase tracking-widest text-foreground/90">
                   {col.heading}
                 </h3>
@@ -103,7 +128,7 @@ export function Skills() {
                     </li>
                   ))}
                 </ul>
-              </div>
+              </GlassButton2>
             </div>
           ))}
         </div>
