@@ -120,7 +120,6 @@ export function Skills() {
                   alignItems: 'flex-start',
                   justifyContent: 'flex-start',
                   padding: '1.5rem 1.75rem',
-                  textShadow: 'none',
                   letterSpacing: 'normal',
                 }}
               >
@@ -130,7 +129,7 @@ export function Skills() {
                 <ul className="flex flex-col gap-4">
                   {col.skills.map(({ label, Icon }) => (
                     <li key={label} className="flex items-center gap-3.5">
-                      <Icon className="h-5 w-5 shrink-0 text-foreground/50" />
+                      <Icon className="h-5 w-5 shrink-0 text-foreground/50" style={{ filter: 'drop-shadow(0 0.15em 0.05em rgba(0,0,0,0.12))' }} />
                       <span className="text-base text-foreground/80">{label}</span>
                     </li>
                   ))}
