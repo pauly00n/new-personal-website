@@ -65,6 +65,7 @@ export function Nav() {
           <a
             key={link.href + link.label}
             href={link.href}
+            aria-current={pathname === link.href ? "page" : undefined}
             className={`nav-link text-sm transition-colors ${pathname === link.href ? "text-black nav-link-active" : "text-black/70 hover:text-black"}`}
           >
             {link.label}

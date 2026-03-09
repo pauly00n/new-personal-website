@@ -77,27 +77,6 @@ export function Skills() {
 
   return (
     <section ref={sectionRef} id="skills" className="relative border-t border-border/50">
-      <style>{`
-        @keyframes skillsFromLeft {
-          0%   { opacity: 0; transform: translateX(-20px); }
-          60%  { opacity: 1; transform: translateX(5px); }
-          80%  { transform: translateX(-2px); }
-          100% { opacity: 1; transform: translateX(0); }
-        }
-        @keyframes skillsFromRight {
-          0%   { opacity: 0; transform: translateX(20px); }
-          60%  { opacity: 1; transform: translateX(-5px); }
-          80%  { transform: translateX(2px); }
-          100% { opacity: 1; transform: translateX(0); }
-        }
-        @keyframes skillsFromBottom {
-          0%   { opacity: 0; transform: translateY(16px); }
-          60%  { opacity: 1; transform: translateY(-5px); }
-          80%  { transform: translateY(2px); }
-          100% { opacity: 1; transform: translateY(0); }
-        }
-      `}</style>
-
       <SectionTopGlow />
 
       <div className="mx-auto max-w-5xl px-6 py-24 lg:px-8 lg:py-32">
@@ -112,7 +91,7 @@ export function Skills() {
               ref={colRefs[ci]}
               style={colFade(ci)}
             >
-              <div className="rounded-2xl border border-white/20 backdrop-blur-md shadow-[0_8px_30px_rgba(0,0,0,0.12)] px-7 py-6 h-full hover:bg-white/8 hover:border-white/40 transition-colors">
+              <div className="rounded-2xl border border-white/20 backdrop-blur-md shadow-[0_8px_30px_rgba(0,0,0,0.12)] px-7 py-6 h-full hover:bg-white/8 hover:border-white/40 transition-colors bg-gradient-to-b from-white/5 to-white/2">
                 <h3 className="mb-5 text-sm font-medium uppercase tracking-widest text-foreground/90">
                   {col.heading}
                 </h3>

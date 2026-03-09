@@ -30,7 +30,6 @@ const projects = [
       "Full stack web & mobile app delivering daily scripture reading(s) for Stanford students",
     tags: ["React Native", "TypeScript", "AWS"],
     liveUrl: "https://apps.apple.com/us/app/stanford-christian-students/id1606989492",
-    githubUrl: "https://scsdaily.com",
     image: "/scsapp.png",
   },
   {
@@ -131,29 +130,6 @@ export function Projects() {
 
   return (
     <section ref={sectionRef} id="projects" className="relative border-t border-border/50 min-h-screen" >
-      <style>{`
-        @keyframes projectsFadeIn {
-          from { opacity: 0; transform: translateY(10px); }
-          to   { opacity: 1; transform: translateY(0); }
-        }
-        @keyframes projectsFadeTopLeft {
-          from { opacity: 0; transform: translate(-12px, -12px); }
-          to   { opacity: 1; transform: translate(0, 0); }
-        }
-        @keyframes projectsFadeTopRight {
-          from { opacity: 0; transform: translate(12px, -12px); }
-          to   { opacity: 1; transform: translate(0, 0); }
-        }
-        @keyframes projectsFadeLeft {
-          from { opacity: 0; transform: translateX(-12px); }
-          to   { opacity: 1; transform: translateX(0); }
-        }
-        @keyframes projectsFadeRight {
-          from { opacity: 0; transform: translateX(12px); }
-          to   { opacity: 1; transform: translateX(0); }
-        }
-      `}</style>
-
       <SectionTopGlow />
 
       <div className="mx-auto max-w-6xl px-6 py-24 lg:px-8 lg:py-20">
@@ -194,6 +170,7 @@ export function Projects() {
                     src={project.image}
                     alt={project.title}
                     fill
+                    sizes="(max-width: 768px) 100vw, 50vw"
                     className="object-cover transition-transform duration-500 ease-out group-hover:scale-[1.03]"
                   />
 

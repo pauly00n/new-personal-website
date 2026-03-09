@@ -8,6 +8,7 @@ import React, {
   useRef,
   useState,
 } from 'react'
+import { cn, hexToRgb } from '@/lib/utils'
 
 export interface GlassPillSafariProps extends HTMLAttributes<HTMLDivElement> {
   children?: ReactNode
@@ -20,17 +21,6 @@ export interface GlassPillSafariProps extends HTMLAttributes<HTMLDivElement> {
   tintColor?: string
   tintOpacity?: number
   outerShadowBlur?: number
-}
-
-const cn = (...classes: Array<string | undefined | false | null>) =>
-  classes.filter(Boolean).join(' ')
-
-function hexToRgb(hex: string): string {
-  const clean = hex.replace('#', '')
-  const full  = clean.length === 3
-    ? clean.split('').map((c) => c + c).join('')
-    : clean
-  return `${parseInt(full.slice(0, 2), 16)}, ${parseInt(full.slice(2, 4), 16)}, ${parseInt(full.slice(4, 6), 16)}`
 }
 
 function drawSpecular(

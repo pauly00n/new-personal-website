@@ -133,7 +133,7 @@
   .animate-fade-in {
     animation: fade-in 0.8s ease-out;
   }
-  
+
   @keyframes fade-in {
     from {
       opacity: 0;
@@ -144,11 +144,11 @@
       transform: translateY(0);
     }
   }
-  
+
   .animate-bounce {
     animation: bounce 1s infinite;
   }
-  
+
   @keyframes bounce {
     0%, 100% {
       transform: translateY(0);
@@ -156,5 +156,53 @@
     50% {
       transform: translateY(-5px);
     }
+  }
+
+  /* Shared fade-up — used by Hero and About */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(12px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  /* Projects section */
+  @keyframes projectsFadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes projectsFadeTopLeft {
+    from { opacity: 0; transform: translate(-12px, -12px); }
+    to   { opacity: 1; transform: translate(0, 0); }
+  }
+  @keyframes projectsFadeTopRight {
+    from { opacity: 0; transform: translate(12px, -12px); }
+    to   { opacity: 1; transform: translate(0, 0); }
+  }
+  @keyframes projectsFadeLeft {
+    from { opacity: 0; transform: translateX(-12px); }
+    to   { opacity: 1; transform: translateX(0); }
+  }
+  @keyframes projectsFadeRight {
+    from { opacity: 0; transform: translateX(12px); }
+    to   { opacity: 1; transform: translateX(0); }
+  }
+
+  /* Skills section */
+  @keyframes skillsFromLeft {
+    0%   { opacity: 0; transform: translateX(-20px); }
+    60%  { opacity: 1; transform: translateX(5px); }
+    80%  { transform: translateX(-2px); }
+    100% { opacity: 1; transform: translateX(0); }
+  }
+  @keyframes skillsFromRight {
+    0%   { opacity: 0; transform: translateX(20px); }
+    60%  { opacity: 1; transform: translateX(-5px); }
+    80%  { transform: translateX(2px); }
+    100% { opacity: 1; transform: translateX(0); }
+  }
+  @keyframes skillsFromBottom {
+    0%   { opacity: 0; transform: translateY(16px); }
+    60%  { opacity: 1; transform: translateY(-5px); }
+    80%  { transform: translateY(2px); }
+    100% { opacity: 1; transform: translateY(0); }
   }
 }

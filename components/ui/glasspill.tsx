@@ -10,6 +10,7 @@ import React, {
   useRef,
   useState,
 } from 'react'
+import { cn, hexToRgb } from '@/lib/utils'
 
 export interface GlassPillProps extends HTMLAttributes<HTMLDivElement> {
   children?: ReactNode
@@ -37,9 +38,6 @@ export interface GlassPillProps extends HTMLAttributes<HTMLDivElement> {
   outerShadowBlur?: number
 }
 
-const cn = (...classes: Array<string | undefined | false | null>) =>
-  classes.filter(Boolean).join(' ')
-
 const SURFACE_FNS = {
   convex_squircle: (x: number) => Math.pow(1 - Math.pow(1 - x, 4), 0.25),
   convex_circle:   (x: number) => Math.sqrt(1 - (1 - x) * (1 - x)),
@@ -50,14 +48,6 @@ const SURFACE_FNS = {
     const t = 6 * x ** 5 - 15 * x ** 4 + 10 * x ** 3
     return convex * (1 - t) + concave * t
   },
-}
-
-function hexToRgb(hex: string): string {
-  const clean = hex.replace('#', '')
-  const full  = clean.length === 3
-    ? clean.split('').map((c) => c + c).join('')
-    : clean
-  return `${parseInt(full.slice(0, 2), 16)}, ${parseInt(full.slice(2, 4), 16)}, ${parseInt(full.slice(4, 6), 16)}`
 }
 
 function calculateRefractionProfile(
