@@ -6,7 +6,6 @@ rehauled portfolio site
 
 - next.js 16: (app router) + react 19 + typescript
 - tailwind css v4
-- shadcn/ui: (new york style, radix ui primitives)
 
 ## pages
 
@@ -39,8 +38,10 @@ components/
     glasspill-auto.tsx    # safari-aware glass pill (use this)
     glasspill.tsx         # chrome/firefox displacement refraction
     glasspill-safari.tsx  # css backdrop-filter fallback
+    glassbutton2.tsx      # light rounded glass elements with hover. used in skills and buttonrow
     textlink.tsx          # inline link with animated underline
-    ...                   # shadcn/ui primitives
+    section-label.tsx     # small section heading label
+    section-top-glow.tsx  # decorative top glow on section boundaries
 
 lib/
   utils.ts            # cn() helper (clsx + tailwind-merge)
