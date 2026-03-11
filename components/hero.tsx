@@ -25,7 +25,7 @@ export function Hero() {
 
           {/* Role */}
           <p style={fadeUp(400)} className="mt-4 text-lg text-muted-foreground font-medium sm:text-xl">
-            Full-Stack Developer & Researcher
+            Software Engineer & Researcher
           </p>
 
           {/* Bio */}
