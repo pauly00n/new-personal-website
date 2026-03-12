@@ -271,7 +271,7 @@ export default function GlassPill({
                 scale={maps.scale} xChannelSelector="R" yChannelSelector="G"
                 result="displaced"
               />
-              <feColorMatrix in="displaced" type="saturate" values={specularSaturation} result="displaced_sat" />
+              <feColorMatrix in="displaced" type="saturate" values={String(specularSaturation)} result="displaced_sat" />
               <feImage href={maps.specUrl} x="0" y="0" width={width} height={height} result="spec_layer" />
               <feComposite in="displaced_sat" in2="spec_layer" operator="in" result="spec_masked" />
               <feComponentTransfer in="spec_layer" result="spec_faded">

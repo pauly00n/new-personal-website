@@ -408,7 +408,7 @@ export default function GlassButton({
               <feColorMatrix
                 in="displaced"
                 type="saturate"
-                values={specularSaturation}
+                values={String(specularSaturation)}
                 result="displaced_sat"
               />
               <feImage
