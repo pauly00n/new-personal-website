@@ -1,9 +1,10 @@
 "use client"
 
-import { useRef } from "react"
+import { useEffect, useRef, useState } from "react"
 import { SectionTopGlow } from "@/components/ui/section-top-glow"
 import { SectionLabel } from "@/components/ui/section-label"
 import { useIntersectionOnce, useIntersectionsOnce } from "@/hooks/use-intersection-once"
+import { useMobileScrollLine } from "@/hooks/use-mobile-scroll-line"
 import GlassButton2 from "@/components/ui/glassbutton2"
 import { FaPython, FaReact, FaAws } from "react-icons/fa"
 import {
@@ -69,8 +70,18 @@ export function Skills() {
   const colRef2 = useRef<HTMLDivElement>(null)
   const colRefs = [colRef0, colRef1, colRef2]
 
+  const [isMobile, setIsMobile] = useState(false)
+  useEffect(() => {
+    const mq = window.matchMedia("(max-width: 639px)")
+    setIsMobile(mq.matches)
+    const handler = (e: MediaQueryListEvent) => setIsMobile(e.matches)
+    mq.addEventListener("change", handler)
+    return () => mq.removeEventListener("change", handler)
+  }, [])
+
   const headingVisible = useIntersectionOnce(sectionRef)
   const colVisible = useIntersectionsOnce(colRefs)
+  const activeColIdx = useMobileScrollLine(colRefs, isMobile)
 
   function headingFade(): React.CSSProperties {
     return headingVisible
@@ -114,7 +125,8 @@ export function Skills() {
             >
               <GlassButton2
                 fill
-                wrapperStyle={{ '--gb2-radius': '1rem', '--gb2-sheen-pos': '7% 7%', '--gb2-sheen-hover-pos': '13% 21%', height: '100%' } as React.CSSProperties}
+                forceHover={isMobile && activeColIdx === ci}
+                wrapperStyle={{ '--gb2-radius': '1rem', '--gb2-sheen-pos': '7% 7%', '--gb2-sheen-hover-pos': '18% 32%', height: '100%' } as React.CSSProperties}
                 spanStyle={{
                   flexDirection: 'column',
                   alignItems: 'flex-start',

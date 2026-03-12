@@ -5,12 +5,13 @@ import Image from "next/image"
 import { ArrowUpRight, Github } from "lucide-react"
 import { SectionTopGlow } from "@/components/ui/section-top-glow"
 import { useIntersectionOnce } from "@/hooks/use-intersection-once"
+import { useMobileScrollLine } from "@/hooks/use-mobile-scroll-line"
 
 const projects = [
   {
     title: "Ask Stella",
     description:
-      "Full stack web app integrating multiple AI radiology workflows into one",
+      "Full stack web app solving radiologists' pain points with AI workflows, integrating multiple into one place.",
     tags: ["Next.js", "TypeScript", "Supabase"],
     liveUrl: "https://paulyoon.xyz/stella",
     githubUrl: "https://github.com/pauly00n/personal-website",
@@ -61,26 +62,38 @@ const projects = [
 
 export function Projects() {
   const sectionRef = useRef<HTMLElement>(null)
-  const rowRef0 = useRef<HTMLDivElement>(null)
-  const rowRef1 = useRef<HTMLDivElement>(null)
-  const rowRef2 = useRef<HTMLDivElement>(null)
-  const rowRefs = [rowRef0, rowRef1, rowRef2]
+  const cardRef0 = useRef<HTMLDivElement>(null)
+  const cardRef1 = useRef<HTMLDivElement>(null)
+  const cardRef2 = useRef<HTMLDivElement>(null)
+  const cardRef3 = useRef<HTMLDivElement>(null)
+  const cardRef4 = useRef<HTMLDivElement>(null)
+  const cardRef5 = useRef<HTMLDivElement>(null)
+  const allCardRefs = [cardRef0, cardRef1, cardRef2, cardRef3, cardRef4, cardRef5]
 
   const headingVisible = useIntersectionOnce(sectionRef)
-  const [rowVisible, setRowVisible] = useState([false, false, false])
-  // Tracks when each row's observer fired — used to detect simultaneous triggers
-  const rowTriggeredAt = useRef<(number | null)[]>([null, null, null])
+  const [isMobile, setIsMobile] = useState(false)
+  const [cardVisible, setCardVisible] = useState<boolean[]>(Array(6).fill(false))
+  // Tracks when each card's observer fired — used to detect simultaneous triggers
+  const cardTriggeredAt = useRef<(number | null)[]>(Array(6).fill(null))
 
-  // Per-row observers — each fires independently when that row enters the viewport
   useEffect(() => {
-    const observers = rowRefs.map((ref, i) => {
+    const mq = window.matchMedia("(max-width: 767px)")
+    setIsMobile(mq.matches)
+    const handler = (e: MediaQueryListEvent) => setIsMobile(e.matches)
+    mq.addEventListener("change", handler)
+    return () => mq.removeEventListener("change", handler)
+  }, [])
+
+  // Per-card observers — on desktop only even-indexed cards trigger their row pair
+  useEffect(() => {
+    const observers = allCardRefs.map((ref, i) => {
       const el = ref.current
       if (!el) return null
       const observer = new IntersectionObserver(
         ([entry]) => {
           if (entry.isIntersecting) {
-            rowTriggeredAt.current[i] = performance.now()
-            setRowVisible(prev => { const next = [...prev]; next[i] = true; return next })
+            cardTriggeredAt.current[i] = performance.now()
+            setCardVisible(prev => { const next = [...prev]; next[i] = true; return next })
             observer.disconnect()
           }
         },
@@ -91,6 +104,8 @@ export function Projects() {
     })
     return () => observers.forEach(o => o?.disconnect())
   }, [])
+
+  const activeIdx = useMobileScrollLine(allCardRefs, isMobile)
 
   function fadeStyle(delayMs: number): React.CSSProperties {
     return headingVisible
@@ -111,17 +126,25 @@ export function Projects() {
   ]
 
   function cardFadeStyle(idx: number): React.CSSProperties {
+    if (isMobile) {
+      // Mobile: single column — each card fades in independently
+      if (!cardVisible[idx]) return { opacity: 0 }
+      return { animation: `projectsFadeLeft 550ms ease-out 0ms both` }
+    }
+
+    // Desktop: pair cards by row — left card triggers both
     const row = Math.floor(idx / 2)
-    if (!rowVisible[row]) return { opacity: 0 }
+    const rowTriggerIdx = row * 2
+    if (!cardVisible[rowTriggerIdx]) return { opacity: 0 }
 
     const { name, delay } = CARD_ANIM[idx]
-    const myTime = rowTriggeredAt.current[row] ?? 0
+    const myTime = cardTriggeredAt.current[rowTriggerIdx] ?? 0
 
     // If a previous row fired within 150ms of this one, they were simultaneous —
-    // add 300ms stagger per such row so they cascade rather than all pop at once.
+    // add 500ms stagger per such row so they cascade rather than all pop at once.
     let stagger = 0
     for (let r = 0; r < row; r++) {
-      const t = rowTriggeredAt.current[r]
+      const t = cardTriggeredAt.current[r * 2]
       if (t !== null && Math.abs(myTime - t) < 150) stagger += 500
     }
 
@@ -151,9 +174,9 @@ export function Projects() {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           {projects.map((project, idx) => {
             const primaryUrl = project.liveUrl || project.githubUrl || "#"
-            const rowRef = idx % 2 === 0 ? rowRefs[idx / 2] : undefined
-            return (
-              <div key={project.title} ref={rowRef} className="group" style={cardFadeStyle(idx)}>
+            const isCardActive = isMobile && activeIdx === idx
+              return (
+              <div key={project.title} ref={allCardRefs[idx]} className="group" style={cardFadeStyle(idx)}>
 
                 {/* Image card */}
                 <a
@@ -171,20 +194,25 @@ export function Projects() {
                     alt={project.title}
                     fill
                     sizes="(max-width: 768px) 100vw, 50vw"
-                    className="object-cover transition-transform duration-500 ease-out group-hover:scale-[1.03]"
+                    className="object-cover transition-transform duration-500 ease-out md:group-hover:scale-[1.03]"
+                    style={isCardActive ? { transform: 'scale(1.03)', transition: 'transform 500ms ease-out' } : undefined}
                   />
 
                   {/* Overlay */}
                   <div
-                    className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 ease-out"
+                    className="absolute inset-0 opacity-0 md:group-hover:opacity-100 transition-opacity duration-500 ease-out"
                     style={{
                       background:
                         "linear-gradient(to bottom, transparent 25%, rgba(1, 60, 110, 0.55) 50%, rgba(0, 40, 85, 0.92) 100%)",
+                      ...(isCardActive ? { opacity: 1 } : undefined),
                     }}
                   />
 
                   {/* Overlay content */}
-                  <div className="absolute inset-x-0 bottom-0 p-6 opacity-0 translate-y-3 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-500 ease-out">
+                  <div
+                    className="absolute inset-x-0 bottom-0 p-6 opacity-0 translate-y-3 md:group-hover:opacity-100 md:group-hover:translate-y-0 transition-all duration-500 ease-out"
+                    style={isCardActive ? { opacity: 1, transform: 'translateY(0)' } : undefined}
+                  >
                     <h3 className="font-serif text-xl font-medium text-white leading-snug">
                       {project.title}
                     </h3>
