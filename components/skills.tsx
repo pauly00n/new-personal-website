@@ -126,6 +126,7 @@ export function Skills() {
               <GlassButton2
                 fill
                 forceHover={isMobile && activeColIdx === ci}
+                disableHover={isMobile}
                 wrapperStyle={{ '--gb2-radius': '1rem', '--gb2-sheen-tx': '17%', '--gb2-sheen-ty': '17%', '--gb2-sheen-hover-tx': '8%', '--gb2-sheen-hover-ty': '8%', '--gb2-sheen-hover-angle': '-35deg', height: '100%' } as React.CSSProperties}
                 spanStyle={{
                   flexDirection: 'column',

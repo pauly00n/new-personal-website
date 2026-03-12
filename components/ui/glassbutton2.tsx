@@ -95,19 +95,17 @@ const STYLES = `
   pointer-events: none;
 }
 
-@media (min-width: 640px) {
-  .gb2-btn:hover .gb2-clip .gb2-backdrop {
-    opacity: 0;
-  }
+.gb2-btn:not(.gb2-btn--no-hover):hover .gb2-clip .gb2-backdrop {
+  opacity: 0;
+}
 
-  .gb2-btn:hover {
-    box-shadow:
-      inset 0 0.125em 0.125em rgba(0,0,0,0.0.03),
-      inset 0 -0.125em 0.125em rgba(255,255,255,0.3),
-      0 0.15em 0.05em -0.1em rgba(0,0,0,0.25),
-      0 0 0.05em 0.1em inset rgba(255,255,255,0.3),
-      0 0 0 0 rgba(255,255,255,1);
-  }
+.gb2-btn:not(.gb2-btn--no-hover):hover {
+  box-shadow:
+    inset 0 0.125em 0.125em rgba(0,0,0,0.0.03),
+    inset 0 -0.125em 0.125em rgba(255,255,255,0.3),
+    0 0.15em 0.05em -0.1em rgba(0,0,0,0.25),
+    0 0 0.05em 0.1em inset rgba(255,255,255,0.3),
+    0 0 0 0 rgba(255,255,255,1);
 }
 
 .gb2-span {
@@ -130,10 +128,8 @@ const STYLES = `
   padding-block: 0.875em;
 }
 
-@media (min-width: 640px) {
-  .gb2-btn:hover .gb2-span {
-    text-shadow: 0.025em 0.025em 0.025em rgba(0,0,0,0.12);
-  }
+.gb2-btn:not(.gb2-btn--no-hover):hover .gb2-span {
+  text-shadow: 0.025em 0.025em 0.025em rgba(0,0,0,0.12);
 }
 
 .gb2-span::after {
@@ -160,11 +156,9 @@ const STYLES = `
     --gb2-angle-2 500ms cubic-bezier(0.25, 1, 0.5, 1);
 }
 
-@media (min-width: 640px) {
-  .gb2-btn:hover .gb2-span::after {
-    transform: translate(var(--gb2-sheen-hover-tx, 5%), var(--gb2-sheen-hover-ty, 5%));
-    --gb2-angle-2: var(--gb2-sheen-hover-angle, -45deg);
-  }
+.gb2-btn:not(.gb2-btn--no-hover):hover .gb2-span::after {
+  transform: translate(var(--gb2-sheen-hover-tx, 5%), var(--gb2-sheen-hover-ty, 5%));
+  --gb2-angle-2: var(--gb2-sheen-hover-angle, -45deg);
 }
 
 .gb2-btn::after {
@@ -197,18 +191,16 @@ const STYLES = `
   box-shadow: inset 0 0 0 calc(var(--border-width) / 2) rgba(255,255,255,0.29);
 }
 
-@media (min-width: 640px) {
-  .gb2-btn:hover::after { --gb2-angle-1: -125deg; }
+.gb2-btn:not(.gb2-btn--no-hover):hover::after { --gb2-angle-1: -125deg; }
 
-  .gb2-wrap:has(.gb2-btn:hover) .gb2-shadow {
-    filter: blur(clamp(2px, 0.0625em, 6px));
-    transition: filter 400ms cubic-bezier(0.25, 1, 0.5, 1);
-  }
+.gb2-wrap:has(.gb2-btn:not(.gb2-btn--no-hover):hover) .gb2-shadow {
+  filter: blur(clamp(2px, 0.0625em, 6px));
+  transition: filter 400ms cubic-bezier(0.25, 1, 0.5, 1);
+}
 
-  .gb2-wrap:has(.gb2-btn:hover) .gb2-shadow::after {
-    top: calc(var(--shadow-cuttoff-fix) - 0.875em);
-    opacity: 1;
-  }
+.gb2-wrap:has(.gb2-btn:not(.gb2-btn--no-hover):hover) .gb2-shadow::after {
+  top: calc(var(--shadow-cuttoff-fix) - 0.875em);
+  opacity: 1;
 }
 
 /* Scroll-line active state (mobile) — mirrors all :hover rules */
@@ -277,6 +269,7 @@ interface GlassButton2Props {
   href?: string
   fill?: boolean
   forceHover?: boolean
+  disableHover?: boolean
 }
 
 export default function GlassButton2({
@@ -288,6 +281,7 @@ export default function GlassButton2({
   href,
   fill,
   forceHover,
+  disableHover,
 }: GlassButton2Props) {
   const Inner = href ? 'a' : 'div'
   return (
@@ -305,7 +299,7 @@ export default function GlassButton2({
         className={cn('gb2-wrap', fill && 'gb2-wrap--fill')}
         style={{ ...(size ? { fontSize: size } : undefined), ...wrapperStyle }}
       >
-        <Inner className={cn('gb2-btn', forceHover && 'gb2-btn--active')} {...(href ? { href } : {})}>
+        <Inner className={cn('gb2-btn', forceHover && 'gb2-btn--active', disableHover && 'gb2-btn--no-hover')} {...(href ? { href } : {})}>
           <span className="gb2-clip" aria-hidden="true">
             <span className="gb2-backdrop" />
           </span>
