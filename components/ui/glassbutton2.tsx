@@ -113,6 +113,8 @@ const STYLES = `
 .gb2-span {
   position: relative;
   display: block;
+  overflow: hidden;
+  border-radius: var(--gb2-radius, 999vw);
   user-select: none;
   -webkit-user-select: none;
   font-family: "Inter", sans-serif;
@@ -138,13 +140,10 @@ const STYLES = `
   content: "";
   display: block;
   position: absolute;
-  width: calc(100% - var(--border-width));
-  height: calc(100% - var(--border-width));
-  top: calc(0% + var(--border-width) / 2);
-  left: calc(0% + var(--border-width) / 2);
-  box-sizing: border-box;
-  border-radius: var(--gb2-radius, 999vw);
-  overflow: clip;
+  width: 200%;
+  height: 200%;
+  top: -50%;
+  left: -50%;
   background: linear-gradient(
     var(--gb2-angle-2),
     rgba(255,255,255,0) 0%,
@@ -154,17 +153,17 @@ const STYLES = `
   z-index: 3;
   mix-blend-mode: screen;
   pointer-events: none;
-  background-size: 200% 200%;
-  background-position: var(--gb2-sheen-pos, 0% 50%);
-  background-repeat: no-repeat;
+  transform: translate(var(--gb2-sheen-tx, 25%), var(--gb2-sheen-ty, 25%));
+  will-change: transform;
   transition:
-    background-position 500ms cubic-bezier(0.25, 1, 0.5, 1),
+    transform 500ms cubic-bezier(0.25, 1, 0.5, 1),
     --gb2-angle-2 500ms cubic-bezier(0.25, 1, 0.5, 1);
 }
 
 @media (min-width: 640px) {
   .gb2-btn:hover .gb2-span::after {
-    background-position: var(--gb2-sheen-hover-pos, 25% 50%);
+    transform: translate(var(--gb2-sheen-hover-tx, 5%), var(--gb2-sheen-hover-ty, 5%));
+    --gb2-angle-2: var(--gb2-sheen-hover-angle, -45deg);
   }
 }
 
@@ -229,7 +228,8 @@ const STYLES = `
 }
 
 .gb2-btn--active .gb2-span::after {
-  background-position: var(--gb2-sheen-hover-pos, 25% 50%);
+  transform: translate(var(--gb2-sheen-hover-tx, 5%), var(--gb2-sheen-hover-ty, 5%));
+  --gb2-angle-2: var(--gb2-sheen-hover-angle, -45deg);
 }
 
 .gb2-btn--active::after { --gb2-angle-1: -125deg; }
