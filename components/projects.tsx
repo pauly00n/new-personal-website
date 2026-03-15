@@ -9,6 +9,14 @@ import { useMobileScrollLine } from "@/hooks/use-mobile-scroll-line"
 
 const projects = [
   {
+    title: "AutoML-Cardiac",
+    description:
+      "Autonomous ML experiment framework for cardiac MRI classification on the ACDC dataset.",
+    tags: ["PyTorch", "Python", "Markdown"],
+    githubUrl: "https://github.com/pauly00n/AutoML-Cardiac",
+    image: "/automl-cardiac.png",
+  },
+  {
     title: "Ask Stella",
     description:
       "Full stack web app solving radiologists' pain points with AI workflows, integrating multiple into one place.",
@@ -60,21 +68,50 @@ const projects = [
   },
 ]
 
+const NUM_PROJECTS = projects.length
+const NUM_ROWS = Math.ceil(NUM_PROJECTS / 2)
+
+// Compute animation name + base delay for each card index (module-level, stable)
+const CARD_ANIM = projects.map((_, idx) => {
+  const row = Math.floor(idx / 2)
+  const col = idx % 2
+  const isLastRow = row === NUM_ROWS - 1
+  const isOnlyInRow = isLastRow && NUM_PROJECTS % 2 === 1
+
+  if (row === 0) {
+    return col === 0
+      ? { name: "projectsFadeTopLeft",  delay: 700 }
+      : { name: "projectsFadeTopRight", delay: 900 }
+  }
+
+  if (isOnlyInRow) {
+    // Solo card in last row (desktop only) — fade in from bottom
+    return { name: "projectsFadeIn", delay: 200 }
+  }
+
+  const delay = row === 1 ? 500 : 200
+  return col === 0
+    ? { name: "projectsFadeLeft",  delay }
+    : { name: "projectsFadeRight", delay }
+})
+
 export function Projects() {
   const sectionRef = useRef<HTMLElement>(null)
-  const cardRef0 = useRef<HTMLDivElement>(null)
-  const cardRef1 = useRef<HTMLDivElement>(null)
-  const cardRef2 = useRef<HTMLDivElement>(null)
-  const cardRef3 = useRef<HTMLDivElement>(null)
-  const cardRef4 = useRef<HTMLDivElement>(null)
-  const cardRef5 = useRef<HTMLDivElement>(null)
-  const allCardRefs = [cardRef0, cardRef1, cardRef2, cardRef3, cardRef4, cardRef5]
+
+  // Dynamic ref array — works for any number of cards without hardcoding refs
+  const cardEls = useRef<(HTMLDivElement | null)[]>(projects.map(() => null))
+  // Stable RefObject-compatible wrappers for useMobileScrollLine
+  const cardRefObjects = useRef(
+    projects.map((_, i) => ({
+      get current() { return cardEls.current[i] }
+    }))
+  )
 
   const headingVisible = useIntersectionOnce(sectionRef)
   const [isMobile, setIsMobile] = useState(false)
-  const [cardVisible, setCardVisible] = useState<boolean[]>(Array(6).fill(false))
+  const [cardVisible, setCardVisible] = useState<boolean[]>(Array(NUM_PROJECTS).fill(false))
   // Tracks when each card's observer fired — used to detect simultaneous triggers
-  const cardTriggeredAt = useRef<(number | null)[]>(Array(6).fill(null))
+  const cardTriggeredAt = useRef<(number | null)[]>(Array(NUM_PROJECTS).fill(null))
 
   useEffect(() => {
     const mq = window.matchMedia("(max-width: 767px)")
@@ -86,8 +123,7 @@ export function Projects() {
 
   // Per-card observers — on desktop only even-indexed cards trigger their row pair
   useEffect(() => {
-    const observers = allCardRefs.map((ref, i) => {
-      const el = ref.current
+    const observers = cardEls.current.map((el, i) => {
       if (!el) return null
       const observer = new IntersectionObserver(
         ([entry]) => {
@@ -105,7 +141,10 @@ export function Projects() {
     return () => observers.forEach(o => o?.disconnect())
   }, [])
 
-  const activeIdx = useMobileScrollLine(allCardRefs, isMobile)
+  const activeIdx = useMobileScrollLine(
+    cardRefObjects.current as Parameters<typeof useMobileScrollLine>[0],
+    isMobile
+  )
 
   function fadeStyle(delayMs: number): React.CSSProperties {
     return headingVisible
@@ -113,26 +152,14 @@ export function Projects() {
       : { opacity: 0 }
   }
 
-  // Delays are now relative to when the row becomes visible.
-  // Row 0: left card at 0ms, right card staggered 200ms.
-  // Rows 1+: both cards fire simultaneously at 0ms.
-  const CARD_ANIM = [
-    { name: "projectsFadeTopLeft",  delay: 700 },
-    { name: "projectsFadeTopRight", delay: 900 },
-    { name: "projectsFadeLeft",     delay: 500 },
-    { name: "projectsFadeRight",    delay: 500 },
-    { name: "projectsFadeLeft",     delay: 200 },
-    { name: "projectsFadeRight",    delay: 200 },
-  ]
-
   function cardFadeStyle(idx: number): React.CSSProperties {
     if (isMobile) {
-      // Mobile: single column — each card fades in independently
+      // Mobile: single column — each card fades in independently (unchanged)
       if (!cardVisible[idx]) return { opacity: 0 }
       return { animation: `projectsFadeLeft 550ms ease-out 0ms both` }
     }
 
-    // Desktop: pair cards by row — left card triggers both
+    // Desktop: pair cards by row — left card (even idx) triggers both
     const row = Math.floor(idx / 2)
     const rowTriggerIdx = row * 2
     if (!cardVisible[rowTriggerIdx]) return { opacity: 0 }
@@ -175,8 +202,14 @@ export function Projects() {
           {projects.map((project, idx) => {
             const primaryUrl = project.liveUrl || project.githubUrl || "#"
             const isCardActive = isMobile && activeIdx === idx
+            const isSoloLastCard = NUM_PROJECTS % 2 === 1 && idx === NUM_PROJECTS - 1
               return (
-              <div key={project.title} ref={allCardRefs[idx]} className="group" style={cardFadeStyle(idx)}>
+              <div
+                key={project.title}
+                ref={el => { cardEls.current[idx] = el }}
+                className={`group${isSoloLastCard ? " md:col-span-2 md:w-1/2 md:mx-auto" : ""}`}
+                style={cardFadeStyle(idx)}
+              >
 
                 {/* Image card */}
                 <a
