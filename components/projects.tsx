@@ -23,7 +23,7 @@ const projects = [
     tags: ["Next.js", "TypeScript", "Supabase"],
     liveUrl: "https://paulyoon.xyz/stella",
     githubUrl: "https://github.com/pauly00n/personal-website",
-    image: "/stella.png",
+    image: "/stella1.png",
   },
   {
     title: "Hidden Studios AdTech Platform",
