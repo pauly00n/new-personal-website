@@ -30,7 +30,7 @@ const projects = [
     description:
       "Ad campaign scheduling platform with impression forecasting powered by live Fortnite player-count data",
     tags: ["Next.js", "TypeScript", "Supabase"],
-    image: "/hidden-studios.png",
+    image: "/hidden-studios1.png",
   },
   {
     title: "Stanford Christian Students App",
@@ -144,8 +144,7 @@ export function Projects() {
     cardRefObjects.current as Parameters<typeof useMobileScrollLine>[0],
     isMobile
   )
-
-  function fadeStyle(delayMs: number): React.CSSProperties {
+function fadeStyle(delayMs: number): React.CSSProperties {
     return headingVisible
       ? { animation: `projectsFadeIn 500ms ease-out ${delayMs}ms both` }
       : { opacity: 0 }
