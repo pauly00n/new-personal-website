@@ -29,7 +29,6 @@ const projects = [
     title: "Hidden Studios AdTech Platform",
     description:
       "Ad campaign scheduling platform with impression forecasting powered by live Fortnite player-count data",
-    liveUrl: "https://scsdaily.com",
     tags: ["Next.js", "TypeScript", "Supabase"],
     image: "/hidden-studios.png",
   },
