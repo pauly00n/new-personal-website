@@ -241,7 +241,7 @@ function fadeStyle(delayMs: number): React.CSSProperties {
 
                   {/* Overlay content */}
                   <div
-                    className="absolute inset-x-0 bottom-0 p-6 opacity-0 translate-y-3 md:group-hover:opacity-100 md:group-hover:translate-y-0 transition-all duration-500 ease-out"
+                    className="absolute inset-x-0 bottom-0 p-6 opacity-0 translate-y-3 md:group-hover:opacity-100 md:group-hover:translate-y-0 transition-[opacity,translate] duration-500 ease-out"
                     style={isCardActive ? { opacity: 1, transform: 'translateY(0)' } : undefined}
                   >
                     <h3 className="font-serif text-xl font-medium text-white leading-snug">
@@ -254,7 +254,7 @@ function fadeStyle(delayMs: number): React.CSSProperties {
                       {project.tags.map((tag) => (
                         <span
                           key={tag}
-                          className="inline-flex rounded-full border border-white/25 px-3 py-1 text-xs text-white/65 backdrop-blur-sm"
+                          className="inline-flex rounded-full border border-white/25 px-3 py-1 text-xs text-white/65"
                         >
                           {tag}
                         </span>

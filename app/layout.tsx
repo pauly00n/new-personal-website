@@ -1,12 +1,14 @@
 import type { Metadata } from 'next'
 import { Inter, Playfair_Display } from 'next/font/google'
 import './globals.css'
-import ConditionalLayout from '@/components/conditional-layout';
+import { Nav } from '@/components/nav';
+import { HeroBackground } from '@/components/hero-background';
 
 const _inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
 const _playfair = Playfair_Display({ subsets: ["latin"], variable: "--font-playfair" });
 
 export const metadata: Metadata = {
+  themeColor: '#e0f1f9',
   metadataBase: new URL(
     process.env.NEXT_PUBLIC_SITE_URL ??
     (process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : 'http://localhost:3000')
@@ -54,7 +56,7 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" style={{ backgroundColor: "#e0f1f9" }}>
 
         <head>
                 <script
@@ -74,10 +76,12 @@ export default function RootLayout({
                     }}
                 />
             </head>
-      <body className={`${_inter.variable} ${_playfair.variable} font-sans antialiased`}>
-        <ConditionalLayout>
+      <body className={`${_inter.variable} ${_playfair.variable} font-sans antialiased`} style={{ background: 'transparent' }}>
+        <div style={{ position: 'fixed', top: '-300px', bottom: '-300px', left: 0, right: 0, zIndex: -10, willChange: 'transform' }}>
+          <HeroBackground />
+        </div>
+        <Nav />
         {children}
-        </ConditionalLayout>
       </body>
     </html>
   )

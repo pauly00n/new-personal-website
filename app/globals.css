@@ -121,11 +121,12 @@
     @apply border-border outline-ring/50;
   }
   html {
-    background-color: #e0f1f9; /* mid-point of HeroBackground gradient — last-resort fallback if fixed div doesn't cover */
     scroll-behavior: smooth;
+    background-color: #e0f1f9;
   }
   body {
     @apply text-foreground;
+    background: transparent;
   }
 }
 
@@ -156,6 +157,14 @@
     50% {
       transform: translateY(-5px);
     }
+  }
+
+  @keyframes driftBloom {
+    0%   { transform: translate(-150px, -150px); }
+    25%  { transform: translate( 150px, -150px); }
+    50%  { transform: translate( 150px,  150px); }
+    75%  { transform: translate(-150px,  150px); }
+    100% { transform: translate(-150px, -150px); }
   }
 
   /* Shared fade-up — used by Hero and About */

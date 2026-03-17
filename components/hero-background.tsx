@@ -1,15 +1,4 @@
-"use client"
-
-import { useEffect, useState } from "react"
-
 export function HeroBackground() {
-  const [isSafari, setIsSafari] = useState(false)
-
-  useEffect(() => {
-    const ua = navigator.userAgent
-    setIsSafari(/^((?!chrome|android).)*safari/i.test(ua))
-  }, [])
-
   return (
     <>
       {/* Base gradient */}
@@ -28,28 +17,20 @@ export function HeroBackground() {
           backgroundImage: "url('/noise.png')",
           backgroundRepeat: "repeat",
           backgroundSize: "700px 700px",
-          opacity: isSafari ? 0.10 : 0.4,
-          mixBlendMode: isSafari ? "normal" : "soft-light",
+          opacity: 0.10,
+          mixBlendMode: "normal",
+          willChange: "opacity",
         }}
       />
 
-{/* Drifting radial bloom */}
-      <style>{`
-        @keyframes driftBloom {
-          0%   { transform: translate(-150px, -150px); }
-          25%  { transform: translate( 150px, -150px); }
-          50%  { transform: translate( 150px,  150px); }
-          75%  { transform: translate(-150px,  150px); }
-          100% { transform: translate(-150px, -150px); }
-        }
-      `}</style>
+      {/* Drifting radial bloom */}
       <div className="absolute inset-0 -z-10 overflow-hidden">
         <div
           style={{
             position: "absolute",
             inset: "-25%",
             background:
-              "radial-gradient(ellipse 50% 50%, rgba(1, 123, 185, 0.40), transparent)",
+              "radial-gradient(ellipse 50% 50%, rgba(60, 160, 220, 0.52), transparent)",
             animation: "driftBloom 10s ease-in-out infinite",
           }}
         />

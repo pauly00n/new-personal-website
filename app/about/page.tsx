@@ -1,7 +1,6 @@
 "use client"
 
 import { Footer } from "@/components/footer"
-import { HeroBackground } from "@/components/hero-background"
 import Image from "next/image"
 import { ScrollReset } from "@/components/scroll-reset"
 import TextLink from "@/components/ui/textlink"
@@ -13,11 +12,6 @@ const fadeUp = (delay: number): React.CSSProperties => ({
 export default function AboutPage() {
   return (
     <>
-      {/* Fixed background — extended 300px beyond viewport to cover Safari overscroll */}
-      <div style={{ position: 'fixed', top: '-300px', bottom: '-300px', left: 0, right: 0, zIndex: -10 }}>
-        <HeroBackground />
-      </div>
-
       <div>
         <ScrollReset />
         <main>

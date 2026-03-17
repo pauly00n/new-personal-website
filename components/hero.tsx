@@ -19,7 +19,7 @@ export function Hero() {
         <div className="relative z-10 mx-auto max-w-4xl px-6 text-center lg:px-8 pt-8 sm:pt-0">
 
           {/* Name */}
-          <h1 style={fadeUp(0)} className="text-balance font-serif text-6xl font-medium leading-tight tracking-tight text-foreground sm:text-[5rem]">
+          <h1 style={fadeUp(150)} className="text-balance font-serif text-6xl font-medium leading-tight tracking-tight text-foreground sm:text-[5rem]">
             Paul Yoon
           </h1>
 
