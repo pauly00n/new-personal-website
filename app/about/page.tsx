@@ -23,7 +23,7 @@ export default function AboutPage() {
               <div className="grid gap-10 sm:grid-cols-5">
                 {/* Left column */}
                 <div className="flex flex-col gap-6 sm:col-span-2">
-                  <h2 className="font-serif text-3xl font-medium tracking-tight text-foreground sm:text-4xl pb-6">
+                  <h2 className="text-balance font-serif text-3xl font-medium tracking-tight text-foreground sm:text-4xl pb-6">
                     <span style={fadeUp(0)}>A bit</span>
                     <br />
                     <span className="italic" style={{ color: "#017bb9", ...fadeUp(300) }}>
@@ -44,11 +44,11 @@ export default function AboutPage() {
 
                 {/* Right column */}
                 <div className="flex flex-col gap-6 sm:col-span-3">
-                  <p style={fadeUp(520)} className="text-sm sm:text-base leading-relaxed text-foreground/80">
+                  <p style={fadeUp(520)} className="text-pretty text-sm sm:text-base leading-relaxed text-foreground/80">
                     I was born in Boston, MA, lived in Houston, TX for 10 years, then moved to the Bay Area for high school. I'll be at Stanford for the next ~3 years. I plan to graduate with a degree in Computer Science and a minor in Music.
                   </p>
 
-                  <p style={fadeUp(640)} className="text-sm sm:text-base leading-relaxed text-foreground/80">
+                  <p style={fadeUp(640)} className="text-pretty text-sm sm:text-base leading-relaxed text-foreground/80">
                     My passion for building has existed since the first time I touched a Lego piece. I find Mathematics a
                     fascinating puzzle, with its structures and patterns found in any field I could dream of studying. I&apos;ve
                     also played the French Horn ever since 7th grade, and currently play in the{" "}
@@ -57,7 +57,7 @@ export default function AboutPage() {
                     <TextLink href="https://jesseclevenger.com" className="text-sm sm:text-base">Jesse Clevenger</TextLink>.
                   </p>
 
-                  <p style={fadeUp(760)} className="text-sm sm:text-base leading-relaxed text-foreground/80">
+                  <p style={fadeUp(760)} className="text-pretty text-sm sm:text-base leading-relaxed text-foreground/80">
                     If I&apos;m not locked in studying or building something, you can catch me bouldering, lifting
                     weights, scootering around campus, or watching a good Anime. I&apos;m also a huge big back and would
                     always love to try a new place off campus — you should add{" "}
